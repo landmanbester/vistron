@@ -243,8 +243,8 @@ def info(zarr_path: Path, detailed: bool) -> None:
         ds = xr.open_zarr(zarr_path, chunks=None)
         
         # Basic information
-        console.print(f"\n📏 Dimensions: {list(ds.dims.keys())}")
-        console.print(f"📐 Shape: {[ds.dims[dim] for dim in ds.dims.keys()]}")
+        console.print(f"\n📏 Dimensions: {list(ds.sizes.keys())}")
+        console.print(f"📐 Shape: {[ds.sizes[dim] for dim in ds.sizes.keys()]}")
         console.print(f"🗂️  Data variables: {list(ds.data_vars.keys())}")
         
         # Memory usage estimate
@@ -277,7 +277,7 @@ def info(zarr_path: Path, detailed: bool) -> None:
         
         # Recommendations
         console.print("\n💡 Recommendations:")
-        max_dim_size = max(ds.dims.values())
+        max_dim_size = max(ds.sizes.values())
         if max_dim_size > 2000:
             console.print("  • Consider using downsampling for better performance")
         

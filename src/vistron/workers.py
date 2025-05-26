@@ -73,11 +73,11 @@ class DatasetWorker:
             return None
             
         return {
-            'dimensions': list(self.dataset.dims.keys()),
-            'dimension_sizes': {dim: int(size) for dim, size in self.dataset.dims.items()},
+            'dimensions': list(self.dataset.sizes.keys()),
+            'dimension_sizes': {dim: int(size) for dim, size in self.dataset.sizes.items()},
             'data_vars': list(self.dataset.data_vars.keys()),
             'coords': {name: self._get_coord_info(coord) for name, coord in self.dataset.coords.items()},
-            'shape': [int(self.dataset.dims[dim]) for dim in self.dataset.dims.keys()],
+            'shape': [int(self.dataset.sizes[dim]) for dim in self.dataset.sizes.keys()],
             'data_var_info': {var: {
                 'dtype': str(self.dataset[var].dtype),
                 'shape': list(self.dataset[var].shape)
@@ -100,7 +100,7 @@ class DatasetWorker:
                 for dim, sel in selection.items():
                     if isinstance(sel, slice) and sel == slice(None):
                         # This is a displayed dimension, downsample it
-                        dim_size = self.dataset.dims[dim]
+                        dim_size = self.dataset.sizes[dim]
                         new_selection[dim] = slice(0, dim_size, downsample_factor)
                     else:
                         new_selection[dim] = sel

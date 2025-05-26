@@ -22,6 +22,8 @@ import json
 import logging
 from functools import lru_cache
 
+from vistron import __version__
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -55,7 +57,7 @@ def create_app(app_config: VistronConfig) -> FastAPI:
     app = FastAPI(
         title="Vistron",
         description="Ray-Powered N-Dimensional Data Animator",
-        version="0.1.0",
+        version=__version__,
         lifespan=lifespan
     )
     
