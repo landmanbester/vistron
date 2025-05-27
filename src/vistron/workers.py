@@ -156,7 +156,7 @@ def process_animation_frame(
         return {
             "type": "frame",
             "frame_index": frame_index,
-            "data": data_array.tolist(),
+            "data": data_array,
             "animate_axis_value": float(animate_value),
             "downsample_factor": downsample_factor
         }
